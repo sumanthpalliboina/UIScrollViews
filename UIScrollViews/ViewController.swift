@@ -26,8 +26,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let images = ["family","teddy","mobile"]
         
         pageControl.numberOfPages = images.count
-        pageControl.pageIndicatorTintColor = .black
-        pageControl.currentPageIndicatorTintColor = .white
+        pageControl.pageIndicatorTintColor = .white
+        pageControl.currentPageIndicatorTintColor = .blue
         
         view.setNeedsLayout()
         view.layoutIfNeeded()
