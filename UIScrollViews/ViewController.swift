@@ -19,6 +19,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     var imageViews:[UIImageView] = []
     var rotating:Bool = false
     
+    var zooming:Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +72,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             imageViews.append(imgView)
             
             childScroll.addSubview(imgView)
+            
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(zoomPicture))
+            childScroll.addGestureRecognizer(gesture)
+            
             mainScroll.addSubview(childScroll)
             
         }
@@ -141,6 +147,18 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             self.updateSize()
             self.rotating = false
         })
+    }
+    
+    @objc func zoomPicture(sender:UITapGestureRecognizer){
+        let scroll = imageViews[page].superview as! UIScrollView
+        if !zooming {
+            let position = sender.location(in: scroll)
+            scroll.zoom(to: CGRect(x: position.x, y: position.y, width: 1, height: 1), animated: true)
+            zooming = true
+        }else{
+            scroll.setZoomScale(1.0, animated: true)
+            zooming = false
+        }
     }
 
 
